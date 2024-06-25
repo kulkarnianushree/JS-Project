@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import Tshirt from "./components/TshirtList";
-import Form from "./components/TshirtForm";
+
+import React, { useState } from 'react';
+import Form from "./components/Form";
+import Tshirt from "./components/Tshirt";
+import Display from './components/Dispaly';
 
 function App() {
   const ItemList = [
@@ -11,16 +13,39 @@ function App() {
     { id: 5, name: 'Nike', description: 'Pink colour shirt', price: 5000 }
   ];
 
-  const [selectedTshirt, setSelectedTshirt] = useState(null);
+  const [selectedTshirts, setSelectedTshirts] = useState([]);
   const [clickInfo, setClickInfo] = useState({});
   const [count, setCount] = useState(0);
+  const [show, setShow] = useState(false);
 
-  const CartButtonHandler = () => {
+  const ProductButtonHandler = () => {
     setCount(count + 1);
   };
 
+  const CartButtonHandler = () => {
+    setShow(true);
+  };
+  const OkayButtonHandler = () =>{
+    console.log('Direct the page to Payment')
+    setShow(false)
+  }
+  const cancelButtonHandler = () =>{
+    setShow(false)
+  }
+
   const selectTshirtHandler = (tshirt, size) => {
-    setSelectedTshirt(tshirt);
+    const existingIndex = selectedTshirts.findIndex(item => item.id === tshirt.id && item.size === size);
+    
+    if (existingIndex !== -1) {
+      const updatedSelectedTshirts = [...selectedTshirts];
+      updatedSelectedTshirts[existingIndex].quantity += 1;
+      setSelectedTshirts(updatedSelectedTshirts);
+    } else {
+      const newTshirt = { ...tshirt, size, quantity: 1 };
+      setSelectedTshirts(prevSelectedTshirts => [...prevSelectedTshirts, newTshirt]);
+    }
+    
+    // Update clickInfo
     setClickInfo(prevInfo => {
       const newClickInfo = { ...prevInfo };
       if (!newClickInfo[tshirt.id]) {
@@ -37,8 +62,9 @@ function App() {
         <h1>Big T-shirt Mall</h1>
         <button onClick={CartButtonHandler}>Cart {count}</button>
       </div>
-      <Form selectedTshirt={selectedTshirt} clickInfo={clickInfo} />
+      <Form selectedTshirt={selectedTshirts[selectedTshirts.length - 1]} clickInfo={clickInfo} onChoose={ProductButtonHandler} />
       <Tshirt list={ItemList} onSelectTshirt={selectTshirtHandler} />
+      {show && <Display data={selectedTshirts} onDone={OkayButtonHandler} onCancel={cancelButtonHandler} />}
     </React.Fragment>
   );
 }

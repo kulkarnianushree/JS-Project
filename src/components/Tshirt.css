@@ -1,0 +1,61 @@
+/* Container styling */
+.tshirt-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* List item styling */
+  .tshirt-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Tshirt details styling */
+  .tshirt-details {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .tshirt-description {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .tshirt-price {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Button styling */
+  .tshirt-buttons {
+    margin-top: 10px;
+  }
+  
+  .tshirt-buttons button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tshirt-buttons button:disabled {
+    background-color: #ddd;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  .tshirt-buttons button:hover {
+    background-color: #45a049;
+  }
+  
+  
